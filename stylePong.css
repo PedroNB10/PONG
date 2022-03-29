@@ -1,0 +1,12 @@
+﻿#canvas {
+    border: 1px dashed #ffff;
+    background-color: black;
+}
+
+
+
+body{
+    color: white;
+    background: linear-gradient(90deg, rgba(8,248,255,1) 0%, rgba(103,27,235,1) 35%, rgba(255,0,206,1) 91%);
+    font-family: 'Roboto', sans-serif;
+}
