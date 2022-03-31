@@ -14,6 +14,8 @@ var canvas, context,
     velocidadeBola,
     pontosJogador, pontosOponente;
 
+    var escolha_da_dificuldade = false
+
 function iniciarJogo() {
 
     canvas = document.getElementById("canvas");
@@ -72,6 +74,14 @@ function keyDown(e) {
 
 function loopGame() {
 
+if(escolha_da_dificuldade==false){
+    var dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 10:")
+    console.log(typeof(dificuldade))
+    velocidadeBola = Number(dificuldade)
+    escolha_da_dificuldade=true
+}
+
+    
    /****************************** DESENHO DA TELA *****************************/  
    context.clearRect(0, 0, canvas.width, canvas.height); // limpar a tela antes de desenhar
 
