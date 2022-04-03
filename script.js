@@ -16,10 +16,34 @@ var canvas, context,
 
     var escolha_da_dificuldade = false
 
+    var som_ponto=new Audio('sons_pong/Ponto.mp3');
+    var som_rebote=new Audio('sons_pong/Rebote.mp3')
+    var som_lateral=new Audio('sons_pong/Lateral.mp3')
+    var som_vitoria=new Audio('sons_pong/som_vitoria_10pts.mp3')
+
+    var vitorias_oponente = false;
+    var vitorias_jogador = false;
+    var contador_de_pontos_totais = 0
+    var contador_de_pontos_A = 0
+    var contador_de_pontos_B = 0
+
+  
+    
+
 function iniciarJogo() {
+    
+   
+  
+        
+        
+  
 
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
+
+
+
+   
 
     //Configurações de largura, tamanho e posicionamento da barra
     barraWidth = 30;
@@ -42,17 +66,53 @@ function iniciarJogo() {
     bolaAngulo = Math.floor(Math.random() * 21) - 10; // faz bola ir para uma direção aleatória.
     bolaTempo = 0;
     velocidadeJogador = 15;
-    velocidadeOponente = 30;
+    velocidadeOponente = 2;//tava 30
     velocidadeBola = 10;
     pontosJogador = 0;
     pontosOponente = 0;
+
+   
+    while(escolha_da_dificuldade==false){// escolha da dificuldade
+       
+        var dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 10:")
+        dificuldade = Number(dificuldade)
+        console.log(`A dificuldade é de ${dificuldade}`)
+        console.log(typeof(dificuldade))
+
+        if(dificuldade>0 && dificuldade<10){
+            velocidadeBola =velocidadeBola*dificuldade
+            console.log(`A velocidade da bola é de ${velocidadeBola}`)
+            console.log(typeof(velocidadeBola))
+            escolha_da_dificuldade=true
+        }
+
+        else{
+            alert('O valor digitado da dificuldade está fora do intervalo, digite novamente!')
+            escolha_da_dificuldade=false
+        }
+
+       
+        
+        
+        
+
+    }
 
     //Mantém a tecla como "falso" para não realizar ação
     document.addEventListener('keyup', keyUp, false);
     document.addEventListener('keydown', keyDown, false);
 
+    
     setInterval(loopGame, 30);
+    
+
 }
+
+   
+    
+
+
+
 
 //Verificação - Pressionando as teclas (Consulte as keys)
 function keyUp(e) {
@@ -72,15 +132,11 @@ function keyDown(e) {
 }
 
 
+
+
 function loopGame() {
-
-if(escolha_da_dificuldade==false){
-    var dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 10:")
-    console.log(typeof(dificuldade))
-    velocidadeBola = Number(dificuldade)
-    escolha_da_dificuldade=true
-}
-
+   
+   
     
    /****************************** DESENHO DA TELA *****************************/  
    context.clearRect(0, 0, canvas.width, canvas.height); // limpar a tela antes de desenhar
@@ -97,6 +153,8 @@ if(escolha_da_dificuldade==false){
    context.closePath(); // finaliza o caminho / não é obrigatório
    context.fillStyle = "#ffffff";
    context.fill();
+
+  
 
 
     /****************************** JOGADOR *****************************/  
@@ -119,6 +177,7 @@ if(escolha_da_dificuldade==false){
         oponentePosY -= velocidadeOponente;
         if (oponentePosY <= 0) // se a bola estiver saindo da tela
         {
+            
             oponenteParaCima = false;
         }
     }
@@ -135,6 +194,9 @@ if(escolha_da_dificuldade==false){
     if (bolaTempo <= 0) // caso a bola estiver em jogo, o tempo  e zerado apos marcar ponto, abola ficará invisivel por um tempo
     {
         if ((bolaPosX - bolaRaio) <= (jogadorPosX + barraWidth)) { // caso o jogador encoste na bola no eixo X
+            som_lateral.currentTime = 0
+            
+            som_lateral.play()
             if ((bolaPosY + bolaRaio > jogadorPosY) && (bolaPosY - bolaRaio < jogadorPosY + barraHeigth)) { // caso o jogador encoste na bola no eixo Y
                 bolaParaDireita = true;
                 if (teclaBaixoPressionada) { // se o usuário estiver indo para baixo e tocar na bola
@@ -147,10 +209,14 @@ if(escolha_da_dificuldade==false){
         }
         else {
             if ((bolaPosX + bolaRaio) >= oponentePosX) { // se o oponente encostar na bola no eixo X
+                som_lateral.currentTime = 0
+                som_lateral.play()
+                
                 if ((bolaPosY + bolaRaio) > oponentePosY && (bolaPosY - bolaRaio < oponentePosY + barraHeigth)) { // se o oponente encostar na bola no eixo Y
 
                     bolaParaDireita = false;
                     if (oponenteParaCima) { // caso oponetne estiver indo para cima ao tocar na bola
+                        
                         bolaAngulo = Math.floor(Math.random() * 10) - 9; // manda bola para diagonal para cima
                     }
                     else { // caso o oponente estiver indo para baixo quando tocar na bola
@@ -161,6 +227,9 @@ if(escolha_da_dificuldade==false){
         }
 
         if ((bolaPosY - bolaRaio <= 0) || (bolaPosY + bolaRaio > canvas.height)) { // se a bola estiver indo para cima ou para baixo na tela
+        
+           
+            som_rebote.play() // bola bate nos cantos do canva
             bolaAngulo = bolaAngulo * -1; // multiplicamos por - 1 para inverter a direção da bola no eixo y
         }
         bolaPosY += bolaAngulo; // move bola para cima ou para baixo de acordo com o calculo acima
@@ -174,14 +243,47 @@ if(escolha_da_dificuldade==false){
     }
 
     if ((bolaPosX <= -bolaRaio) || (bolaPosX > canvas.width)) { // se a bola saiu da tela
+       
+       
+       
         if (bolaTempo >= 50) { // se o tempo de deixar a bola invisível passou 
+            
             if (bolaPosX <= - bolaRaio) { // se bola saiu na esquerda 
+             
                 pontosOponente++;
+                if(pontosOponente%10==0 && contador_de_pontos_totais==pontosOponente && vitorias_oponente==false){
+                    
+                    som_vitoria.play()
+                    setTimeout(function(){
+                        alert('O jogador alcançou 10 pontos')
+                        
+                    }, 500)
+                  
+                 
+                    vitorias_oponente=true;
+                }
+                
+              
+                
+                
             }
             else { // se bola saiu na direita 
+                
                 pontosJogador++;
+                if(pontosJogador%10==0 && contador_de_pontos==pontosJogador && vitorias_jogador==false){
+                    
+                    som_vitoria.play()
+                    setTimeout(function(){
+                        alert('O jogador alcançou 10 pontos')
+                        
+                    }, 500)
+                    console.log(contador_de_pontos)
+                   
+                  
+                }
+                
             }
-
+            
             bolaPosX = canvas.width / 2; // coloca bola no centro da tela
             bolaPosY = canvas.height / 2; // coloca bola no centro da tela
 
@@ -192,20 +294,72 @@ if(escolha_da_dificuldade==false){
         else { // caso o tempo de deixar a bola invisível não acabou 
             bolaTempo++;
         }
+     
+        
     }
 
 
     /****************************** PLACAR *****************************/  
+    
     var pontosA = pontosJogador; // variéveis temporarias para alterar pontuação
     var pontosB = pontosOponente;
 
+    var pontosA_formatados;
+    var pontosB_formatados;
+    
+    
+    
     if (pontosA < 10) { // coloca zero a esquerda se for menor que 10 a pontuação 
+        
         pontosA = "0" + pontosA;
+     
+     pontosA_formatados = pontosA.replace(/^./, "")//tira o primeiro caracter da string
+    
+     pontosA_formatados = Number(pontosA_formatados) 
+     
+     contador_de_pontos_A =  pontosA_formatados
+     console.log(contador_de_pontos_A)
+    
+
+        
     }
 
-    if (pontosB < 10) { // voloca zero a esquerda se for menor que 10 a pontuação 
-        pontosB = "0" + pontosB;
+    else{//se for maior igual a 10
+        pontosA_formatados = Number(pontosA_formatados) 
+     
+     contador_de_pontos_A =  pontosA_formatados
+     console.log(contador_de_pontos_A)
+     console.log(typeof(contador_de_pontos_A))
     }
+
+
+    
+    if (pontosB < 10) { // voloca zero a esquerda se for menor que 10 a pontuação 
+        
+        pontosB = "0" + pontosB;
+        
+        pontosB_formatados = pontosB.replace(/^./, "")//tira o primeiro caracter da string
+      
+        pontosB_formatados = Number(pontosB_formatados)
+
+        contador_de_pontos_B =  pontosB_formatados
+         console.log(contador_de_pontos_B)
+        
+       
+
+    }
+
+    else{
+        console.log(typeof(pontosB_formatados))
+        pontosB_formatados = Number(pontosB_formatados)
+
+        contador_de_pontos_B =  pontosB_formatados
+        //  console.log(contador_de_pontos_B)
+        //  console.log(typeof(contador_de_pontos_B)) 
+    }
+
+
+   
 
 
     context.font = "38pt Arial"; // tamanho e fonte
@@ -225,5 +379,7 @@ if(escolha_da_dificuldade==false){
 
 /****************************** FUNÇÃO DO JQUERY *****************************/ 
 $(function () {
+   
     iniciarJogo();
+   
 });
