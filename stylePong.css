@@ -4,6 +4,14 @@
 }
 
 
+#res{
+    color: transparent;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+
 
 body{
     color: white;

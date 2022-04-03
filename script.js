@@ -20,26 +20,42 @@ var canvas, context,
     var som_rebote=new Audio('sons_pong/Rebote.mp3')
     var som_lateral=new Audio('sons_pong/Lateral.mp3')
     var som_vitoria=new Audio('sons_pong/som_vitoria_10pts.mp3')
+    var som_inicio=new Audio('sons_pong/musica_pong_final.mp3')
 
     var vitorias_oponente = false;
     var vitorias_jogador = false;
     var contador_de_pontos_totais = 0
     var contador_de_pontos_A = 0
     var contador_de_pontos_B = 0
+    var resposta_ao_jogo = document.getElementById("res")
+    var botao = document.getElementById('botao')
+   
+    
+    // botao.addEventListener(click, "criacao_tela_canva")
 
-  
+    var jogo_comecou = false
+ 
+    
+    
+    // while(jogo_comecou==false){
+
+        
+    // }
     
 //OBS: Os sons interativos só funcionam quando há interação com as barrinhas do jogo 
 
+function musica_inicio(){
+    
+    som_inicio.play()
+    
+   }
+
+
+
+
 function iniciarJogo() {
     
-   
-  
-        
-        
-  
-
-    canvas = document.getElementById("canvas");
+   canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
 
 
@@ -102,6 +118,7 @@ function iniciarJogo() {
     
     setInterval(loopGame, 30);
     
+       
 
 }
 
@@ -113,7 +130,9 @@ function iniciarJogo() {
 
 //Verificação - Pressionando as teclas (Consulte as keys)
 function keyUp(e) {
+
     if (e.keyCode == 38) {
+       
         teclaCimaPressionada = false;
     } else if (e.keyCode == 40) {
         teclaBaixoPressionada = false;
@@ -122,6 +141,8 @@ function keyUp(e) {
 
 function keyDown(e) {
     if (e.keyCode == 38) {
+       
+      
         teclaCimaPressionada = true;
     } else if (e.keyCode == 40) {
         teclaBaixoPressionada = true;
@@ -131,9 +152,11 @@ function keyDown(e) {
 
 
 
+
+
 function loopGame() {
-   
-   
+    
+   musica_inicio()
     
    /****************************** DESENHO DA TELA *****************************/  
    context.clearRect(0, 0, canvas.width, canvas.height); // limpar a tela antes de desenhar
@@ -254,10 +277,28 @@ function loopGame() {
                 if(pontosOponente%10==0 && contador_de_pontos_totais!=pontosOponente){
                    
                     som_vitoria.play()
+                    resposta_ao_jogo.style.color = 'white'
+                    resposta_ao_jogo.innerHTML = 'O jogador 2 alcançou 10 pontos'
+
                     setTimeout(function(){
-                        alert('O jogador 2 alcançou 10 pontos')
+                        resposta_ao_jogo.style.color = 'transparent'
                         
-                    }, 500)
+                    }, 1500)
+                  
+                 
+                  
+                    contador_de_pontos_totais=0
+                }
+
+                else if(pontosOponente%10==0 && pontosJogador==1){// foi utilizado para consertar um bug quando o jogador 1 faz somente um ponto e o 2 completa 10 pontos
+
+                    som_vitoria.play()
+                    resposta_ao_jogo.style.color = 'white'
+                    resposta_ao_jogo.innerHTML = 'O jogador 2 alcançou 10 pontos'
+                    setTimeout(function(){
+                        resposta_ao_jogo.style.color = 'transparent'
+                        
+                    }, 1500)
                   
                  
                   
@@ -276,14 +317,34 @@ function loopGame() {
                 if(pontosJogador%10==0 && contador_de_pontos_totais!=pontosJogador){
                    
                     som_vitoria.play()
+                    resposta_ao_jogo.style.color = 'white'
+                    resposta_ao_jogo.innerHTML = 'O jogador 1 alcançou 10 pontos'
+
                     setTimeout(function(){
-                        alert('O jogador 1 alcançou 10 pontos')
+                        resposta_ao_jogo.style.color = 'transparent'
                         
-                    }, 500)
+                    }, 1500)
                     
                    contador_de_pontos_totais=0
                   
                 }
+
+                else if(pontosJogador%10==0 && pontosOponente==1){// foi utilizado para consertar um bug quando o jogador 2 faz somente um ponto e o 1 completa 10 pontos
+                    
+                    som_vitoria.play()
+                    resposta_ao_jogo.style.color = 'white'
+                    resposta_ao_jogo.innerHTML = 'O jogador 1 alcançou 10 pontos'
+
+                    setTimeout(function(){
+                        resposta_ao_jogo.style.color = 'transparent'
+                        
+                    }, 1500)
+                  
+                 
+                  
+                    contador_de_pontos_totais=0
+                }
+
                 
             }
             
@@ -383,6 +444,7 @@ function loopGame() {
 
 
 /****************************** FUNÇÃO DO JQUERY *****************************/ 
+ 
 $(function () {
    
     iniciarJogo();
