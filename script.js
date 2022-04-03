@@ -76,13 +76,9 @@ function iniciarJogo() {
        
         var dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 10:")
         dificuldade = Number(dificuldade)
-        console.log(`A dificuldade é de ${dificuldade}`)
-        console.log(typeof(dificuldade))
 
         if(dificuldade>0 && dificuldade<10){
             velocidadeBola =velocidadeBola*dificuldade
-            console.log(`A velocidade da bola é de ${velocidadeBola}`)
-            console.log(typeof(velocidadeBola))
             escolha_da_dificuldade=true
         }
 
@@ -251,16 +247,20 @@ function loopGame() {
             if (bolaPosX <= - bolaRaio) { // se bola saiu na esquerda 
              
                 pontosOponente++;
-                if(pontosOponente%10==0 && contador_de_pontos_totais==pontosOponente && vitorias_oponente==false){
-                    
+               
+                contador_de_pontos_totais =contador_de_pontos_A+contador_de_pontos_B
+               
+                if(pontosOponente%10==0 && contador_de_pontos_totais!=pontosOponente){
+                   
                     som_vitoria.play()
                     setTimeout(function(){
-                        alert('O jogador alcançou 10 pontos')
+                        alert('O jogador 2 alcançou 10 pontos')
                         
                     }, 500)
                   
                  
-                    vitorias_oponente=true;
+                  
+                    contador_de_pontos_totais=0
                 }
                 
               
@@ -270,15 +270,17 @@ function loopGame() {
             else { // se bola saiu na direita 
                 
                 pontosJogador++;
-                if(pontosJogador%10==0 && contador_de_pontos==pontosJogador && vitorias_jogador==false){
-                    
+                contador_de_pontos_totais =contador_de_pontos_A+contador_de_pontos_B
+               
+                if(pontosJogador%10==0 && contador_de_pontos_totais!=pontosJogador){
+                   
                     som_vitoria.play()
                     setTimeout(function(){
-                        alert('O jogador alcançou 10 pontos')
+                        alert('O jogador 1 alcançou 10 pontos')
                         
                     }, 500)
-                    console.log(contador_de_pontos)
-                   
+                    
+                   contador_de_pontos_totais=0
                   
                 }
                 
@@ -325,11 +327,13 @@ function loopGame() {
     }
 
     else{//se for maior igual a 10
-        pontosA_formatados = Number(pontosA_formatados) 
-     
-     contador_de_pontos_A =  pontosA_formatados
+        
+     pontosA_formatados =  pontosA
+
+     contador_de_pontos_A = pontosA_formatados
+
      console.log(contador_de_pontos_A)
-     console.log(typeof(contador_de_pontos_A))
+    
     }
 
 
@@ -343,19 +347,19 @@ function loopGame() {
         pontosB_formatados = Number(pontosB_formatados)
 
         contador_de_pontos_B =  pontosB_formatados
-         console.log(contador_de_pontos_B)
+        console.log(contador_de_pontos_B)
         
        
 
     }
 
     else{
-        console.log(typeof(pontosB_formatados))
-        pontosB_formatados = Number(pontosB_formatados)
+       
+        pontosB_formatados = pontosB
 
         contador_de_pontos_B =  pontosB_formatados
-        //  console.log(contador_de_pontos_B)
-        //  console.log(typeof(contador_de_pontos_B)) 
+        console.log(contador_de_pontos_B)
+       
     }
 
 
