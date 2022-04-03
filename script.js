@@ -29,6 +29,7 @@ var canvas, context,
 
   
     
+//OBS: Os sons interativos só funcionam quando há interação com as barrinhas do jogo 
 
 function iniciarJogo() {
     
@@ -74,7 +75,7 @@ function iniciarJogo() {
    
     while(escolha_da_dificuldade==false){// escolha da dificuldade
        
-        var dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 10:")
+        var dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 9:")
         dificuldade = Number(dificuldade)
 
         if(dificuldade>0 && dificuldade<10){
