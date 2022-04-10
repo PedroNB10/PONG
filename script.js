@@ -2,7 +2,9 @@
 var canvas, context,
     barraWidth, barraHeigth,
     jogadorPosX, jogadorPosY,
-    teclaCimaPressionada, teclaBaixoPressionada,
+    TeclaCimaPressionada_jogador_01, TeclaBaixoPressionada_jogador_01,
+    TeclaCimaPressionada_jogador_02, TeclaBaixoPressionada_jogador_02,
+    teclaCimaPressionada,teclaBaixoPressionada,
     oponentePosX, oponentePosY,
     oponenteParaCima,
     bolaRaio,
@@ -29,7 +31,7 @@ var canvas, context,
     var contador_de_pontos_B = 0
     var resposta_ao_jogo = document.getElementById("res")
     var botao = document.getElementById('botao')
-   
+    var tipo_jogo = 'none'
     
     // botao.addEventListener(click, "criacao_tela_canva")
 
@@ -67,11 +69,14 @@ function iniciarJogo() {
     barraHeigth = 90;
     jogadorPosX = 0;
     jogadorPosY = (canvas.height - barraHeigth) / 2;
-    teclaBaixoPressionada = false;
-    teclaCimaPressionada = false;
+    TeclaBaixoPressionada_jogador_01 = false;
+    TeclaCimaPressionada_jogador_01 = false;
+
+    teclaCimaPressionada=false
+    teclaBaixoPressionada=false
 
     oponentePosX = canvas.width - barraWidth;
-    oponentePosY = 0;
+    oponentePosY = (canvas.height - barraHeigth) / 2;
     oponenteParaCima = false;
 
     //Configuração da dimensão e posicionamento inicial da bola
@@ -83,7 +88,7 @@ function iniciarJogo() {
     bolaAngulo = Math.floor(Math.random() * 21) - 10; // faz bola ir para uma direção aleatória.
     bolaTempo = 0;
     velocidadeJogador = 15;
-    velocidadeOponente = 2;//tava 30
+    velocidadeOponente = 15;//tava 30
     velocidadeBola = 10;
     pontosJogador = 0;
     pontosOponente = 0;
@@ -97,6 +102,19 @@ function iniciarJogo() {
         if(dificuldade>0 && dificuldade<10){
             velocidadeBola =velocidadeBola*dificuldade
             escolha_da_dificuldade=true
+            while(tipo_jogo=='none'){
+                tipo_jogo = prompt("Agora escolha entre Multiplayer para : 'PVP' ou contra máquina: PVCPU")
+                console.log(tipo_jogo)
+                console.log(typeof(tipo_jogo))
+                if(tipo_jogo!='PVP' && tipo_jogo!='PVCPU'){
+                    alert("Você digitou caracteres não conhecidos, clique em ok e digite novamente!")
+                    tipo_jogo='none'
+                    console.log(tipo_jogo)
+                }
+
+
+
+            }
         }
 
         else{
@@ -111,11 +129,23 @@ function iniciarJogo() {
 
     }
 
-    //Mantém a tecla como "falso" para não realizar ação
-    document.addEventListener('keyup', keyUp, false);
-    document.addEventListener('keydown', keyDown, false);
-
+    if(tipo_jogo=='PVP'){
+        document.addEventListener('keyup', tecla_w, false);
+        document.addEventListener('keydown', tecla_s, false);
     
+        document.addEventListener('keyup', seta_cima, false);
+        document.addEventListener('keydown', seta_baixo, false);
+    }
+
+    if(tipo_jogo=='PVCPU'){
+        document.addEventListener('keyup', seta_cima, false);
+        document.addEventListener('keydown', seta_baixo, false);
+    }
+
+
+    //Mantém a tecla como "falso" para não realizar ação
+   
+
     setInterval(loopGame, 30);
     
        
@@ -129,25 +159,57 @@ function iniciarJogo() {
 
 
 //Verificação - Pressionando as teclas (Consulte as keys)
-function keyUp(e) {
 
-    if (e.keyCode == 38) {
+//Jogador 01
+function tecla_w(e) {
+
+    if (e.keyCode == 87) {
        
-        teclaCimaPressionada = false;
-    } else if (e.keyCode == 40) {
-        teclaBaixoPressionada = false;
+        TeclaCimaPressionada_jogador_01 = false;
+    } else if (e.keyCode == 83) {
+        TeclaBaixoPressionada_jogador_01 = false;
     }
 }
 
-function keyDown(e) {
+function tecla_s(e) {
+    if (e.keyCode == 87) {
+       
+      
+        TeclaCimaPressionada_jogador_01 = true;
+        
+    } else if (e.keyCode == 83) {
+        TeclaBaixoPressionada_jogador_01 = true;
+       
+    }
+}
+
+// Jogador 02
+function seta_cima(e) {
+
+    if (e.keyCode == 38) {
+       
+        TeclaCimaPressionada_jogador_02 = false;
+        teclaCimaPressionada = false;//usado para o caso de ser PVCPU
+    } else if (e.keyCode == 40) {
+        TeclaBaixoPressionada_jogador_02 = false;
+        teclaBaixoPressionada = false; //usado para o caso de ser PVCPU
+    }
+}
+
+function seta_baixo(e) {
     if (e.keyCode == 38) {
        
       
-        teclaCimaPressionada = true;
+        TeclaCimaPressionada_jogador_02 = true;
+        teclaCimaPressionada = true //usado para o caso de ser PVCPU
     } else if (e.keyCode == 40) {
-        teclaBaixoPressionada = true;
+        TeclaBaixoPressionada_jogador_02 = true;
+        teclaBaixoPressionada = true //usado para o caso de ser PVCPU
     }
 }
+
+
+
 
 
 
@@ -178,36 +240,100 @@ function loopGame() {
 
 
     /****************************** JOGADOR *****************************/  
-    if (teclaCimaPressionada != teclaBaixoPressionada) { // se o usuário precionar para cima
-        if (teclaCimaPressionada) { // se for para cima pressionado
-            if (jogadorPosY > 0) { // se a bola não sair da tela
-                jogadorPosY -= velocidadeJogador; // muda posição do jogador
+
+
+    if(tipo_jogo=='PVP'){
+        if (TeclaCimaPressionada_jogador_01 != TeclaBaixoPressionada_jogador_01) { // se o usuário precionar para cima
+            if (TeclaCimaPressionada_jogador_01) { // se for para cima pressionado
+                if (jogadorPosY > 0) { // se a bola não sair da tela
+                    jogadorPosY -= velocidadeJogador; // muda posição do jogador
+                }
+            }
+            else { // se for para baixo 
+                if (jogadorPosY < (canvas.height - barraHeigth)) { // se a bola não saiu da tela
+                    jogadorPosY += velocidadeJogador; // muda posição
+                }
             }
         }
-        else { // se for para baixo 
-            if (jogadorPosY < (canvas.height - barraHeigth)) { // se a bola não saiu da tela
-                jogadorPosY += velocidadeJogador; // muda posição
+
+        if (TeclaCimaPressionada_jogador_02 != TeclaBaixoPressionada_jogador_02) { // se o usuário precionar para cima
+            if (TeclaCimaPressionada_jogador_02) { // se for para cima pressionado
+                if (oponentePosY > 0) { // se a bola não sair da tela
+                    oponentePosY -= velocidadeOponente; // muda posição do jogador
+                }
+            }
+            else { // se for para baixo 
+                if (oponentePosY < (canvas.height - barraHeigth)) { // se a bola não saiu da tela
+                    oponentePosY += velocidadeOponente; // muda posição
+                }
             }
         }
+
+       
+
+
+    }
+
+    if(tipo_jogo=='PVCPU'){
+
+        /****************************** JOGADOR *****************************/  
+        if (teclaCimaPressionada != teclaBaixoPressionada) { // se o usuário precionar para cima
+            if (teclaCimaPressionada) { // se for para cima pressionado
+                if (jogadorPosY > 0) { // se a bola não sair da tela
+                    jogadorPosY -= velocidadeJogador; // muda posição do jogador
+                }
+            }
+            else { // se for para baixo 
+                if (jogadorPosY < (canvas.height - barraHeigth)) { // se a bola não saiu da tela
+                    jogadorPosY += velocidadeJogador; // muda posição
+                }
+            }
+        }
+
+        /****************************** OPONENTE(CPU) *****************************/  
+        if (oponenteParaCima) { // caso o oponente estiver indo para cima
+            oponentePosY -= velocidadeOponente;
+            if (oponentePosY <= 0) // se a bola estiver saindo da tela
+            {
+            
+            oponenteParaCima = false;
+            }
+        }
+        else { // se o oponente estiver se movendo para baixo
+            oponentePosY += velocidadeOponente;
+            if (oponentePosY >= canvas.height - barraHeigth) { // caso a bola estiver saindo da tela
+
+                oponenteParaCima = true;
+            }
+        }
+
+       
+       
+        
+
+        
     }
 
     
-    /****************************** OPONENTE *****************************/  
-    if (oponenteParaCima) { // caso o oponente estiver indo para cima
-        oponentePosY -= velocidadeOponente;
-        if (oponentePosY <= 0) // se a bola estiver saindo da tela
-        {
-            
-            oponenteParaCima = false;
-        }
-    }
-    else { // se o oponente estiver se movendo para baixo
-        oponentePosY += velocidadeOponente;
-        if (oponentePosY >= canvas.height - barraHeigth) { // caso a bola estiver saindo da tela
 
-            oponenteParaCima = true;
-        }
-    }
+
+   
+
+    
+    
+
+
+//teste
+
+
+
+
+
+
+
+
+
+
 
 
     /****************************** BOLA *****************************/  
@@ -219,7 +345,7 @@ function loopGame() {
             som_lateral.play()
             if ((bolaPosY + bolaRaio > jogadorPosY) && (bolaPosY - bolaRaio < jogadorPosY + barraHeigth)) { // caso o jogador encoste na bola no eixo Y
                 bolaParaDireita = true;
-                if (teclaBaixoPressionada) { // se o usuário estiver indo para baixo e tocar na bola
+                if (TeclaBaixoPressionada_jogador_01) { // se o usuário estiver indo para baixo e tocar na bola
                     bolaAngulo = Math.floor(Math.random() * 10) - 9; // manda bola para diagonal para cima
                 }
                 else {
@@ -269,7 +395,7 @@ function loopGame() {
         if (bolaTempo >= 50) { // se o tempo de deixar a bola invisível passou 
             
             if (bolaPosX <= - bolaRaio) { // se bola saiu na esquerda 
-             
+         
                 pontosOponente++;
                
                 contador_de_pontos_totais =contador_de_pontos_A+contador_de_pontos_B
@@ -310,7 +436,7 @@ function loopGame() {
                 
             }
             else { // se bola saiu na direita 
-                
+               
                 pontosJogador++;
                 contador_de_pontos_totais =contador_de_pontos_A+contador_de_pontos_B
                
