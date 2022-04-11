@@ -1,7 +1,17 @@
 ﻿#canvas {
-    border: 1px dashed #ffff;
-    background-color: black;
+    
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+
 }
+
+
 
 
 #res{
@@ -11,10 +21,16 @@
     user-select: none;
 }
 
-
+img{
+    width: 100px;
+    height: 100px;
+    
+}
 
 body{
     color: white;
     background: linear-gradient(90deg, rgba(8,248,255,1) 0%, rgba(103,27,235,1) 35%, rgba(255,0,206,1) 91%);
+    
+    background-size: 100% auto;
     font-family: 'Roboto', sans-serif;
 }

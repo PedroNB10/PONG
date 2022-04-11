@@ -36,8 +36,8 @@ var canvas, context,
     // botao.addEventListener(click, "criacao_tela_canva")
 
     var jogo_comecou = false
- 
-    
+    var ponto_atual = ''
+    var dificuldade
     
     // while(jogo_comecou==false){
 
@@ -85,7 +85,8 @@ function iniciarJogo() {
     bolaPosY = canvas.height / 2;
 
     bolaParaDireita = false;
-    bolaAngulo = Math.floor(Math.random() * 21) - 10; // faz bola ir para uma direção aleatória.
+    //bolaAngulo = Math.floor(Math.random() * 21) - 10; // faz bola ir para uma direção aleatória.
+    bolaAngulo = 0
     bolaTempo = 0;
     velocidadeJogador = 15;
     velocidadeOponente = 15;//tava 30
@@ -96,7 +97,10 @@ function iniciarJogo() {
    
     while(escolha_da_dificuldade==false){// escolha da dificuldade
        
-        var dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 9:")
+         
+
+        dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 9:")
+        
         dificuldade = Number(dificuldade)
 
         if(dificuldade>0 && dificuldade<10){
@@ -104,8 +108,12 @@ function iniciarJogo() {
             escolha_da_dificuldade=true
             while(tipo_jogo=='none'){
                 tipo_jogo = prompt("Agora escolha entre Multiplayer para : 'PVP' ou contra máquina: PVCPU")
+              
                 console.log(tipo_jogo)
                 console.log(typeof(tipo_jogo))
+               
+                console.log(tipo_jogo)
+
                 if(tipo_jogo!='PVP' && tipo_jogo!='PVCPU'){
                     alert("Você digitou caracteres não conhecidos, clique em ok e digite novamente!")
                     tipo_jogo='none'
@@ -140,6 +148,21 @@ function iniciarJogo() {
     if(tipo_jogo=='PVCPU'){
         document.addEventListener('keyup', seta_cima, false);
         document.addEventListener('keydown', seta_baixo, false);
+
+        if(dificuldade>=1 && dificuldade<3){
+            velocidadeOponente=15
+        }
+
+       else if(dificuldade>=3 && dificuldade<5){
+            velocidadeOponente=30// velocidade da cpu
+        }
+        
+        else{
+            velocidadeOponente=45
+        }
+
+       
+
     }
 
 
@@ -395,7 +418,7 @@ function loopGame() {
         if (bolaTempo >= 50) { // se o tempo de deixar a bola invisível passou 
             
             if (bolaPosX <= - bolaRaio) { // se bola saiu na esquerda 
-         
+                ponto_atual = 'ponto_esquerda'
                 pontosOponente++;
                
                 contador_de_pontos_totais =contador_de_pontos_A+contador_de_pontos_B
@@ -436,7 +459,7 @@ function loopGame() {
                 
             }
             else { // se bola saiu na direita 
-               
+                ponto_atual = 'ponto_direita'
                 pontosJogador++;
                 contador_de_pontos_totais =contador_de_pontos_A+contador_de_pontos_B
                
@@ -468,7 +491,7 @@ function loopGame() {
                   
                  
                   
-                    contador_de_pontos_totais=0
+                    contador_de_pontovelos_totais=0
                 }
 
                 
@@ -477,8 +500,28 @@ function loopGame() {
             bolaPosX = canvas.width / 2; // coloca bola no centro da tela
             bolaPosY = canvas.height / 2; // coloca bola no centro da tela
 
-            bolaParaDireita = false;
-            bolaAngulo = Math.floor(Math.random() * 21) - 10; // faz bola ir para uma direção aleatória.
+            
+            //bolaAngulo = Math.floor(Math.random() * 21) - 10; // faz bola ir para uma direção aleatória.
+
+            if(tipo_jogo=='PVCPU'){
+                bolaAngulo = Math.floor(Math.random() * 21) - 10; // faz bola ir para uma direção aleatória.
+                bolaParaDireita=false
+                
+            }
+
+            else if(tipo_jogo=='PVP' && ponto_atual =='ponto_esquerda'){
+                bolaAngulo = 0; // faz bola ir para uma direção aleatória.
+                bolaParaDireita=false
+                
+            }
+
+            else if(tipo_jogo=='PVP' && ponto_atual =='ponto_direita'){
+                bolaAngulo = 0; // faz bola ir para uma direção aleatória.
+                bolaParaDireita=true
+            
+                  }
+
+           
             bolaTempo = 0; // zera o tempo de deixar a bola invisível e coloca novamente em jogo
         }
         else { // caso o tempo de deixar a bola invisível não acabou 
@@ -500,7 +543,7 @@ function loopGame() {
     
     
     if (pontosA < 10) { // coloca zero a esquerda se for menor que 10 a pontuação 
-        
+       
         pontosA = "0" + pontosA;
      
      pontosA_formatados = pontosA.replace(/^./, "")//tira o primeiro caracter da string
