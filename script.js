@@ -1,4 +1,9 @@
 /*************************** Criação das variáveis utilziadas no código ***************************/
+// var botao = document.getElementById("PVP-button")
+// botao.style.color = "red"
+
+var teste = 1
+
 var canvas, context,
     barraWidth, barraHeigth,
     jogadorPosX, jogadorPosY,
@@ -57,13 +62,9 @@ function musica_inicio(){
 
 function iniciarJogo() {
     
-   canvas = document.getElementById("canvas");
+   if(teste==1) {
+    canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
-
-
-
-   
-
     //Configurações de largura, tamanho e posicionamento da barra
     barraWidth = 30;
     barraHeigth = 90;
@@ -95,6 +96,55 @@ function iniciarJogo() {
     pontosOponente = 0;
 
    
+    //Verificação - Pressionando as teclas (Consulte as keys)
+
+//Jogador 01
+function tecla_w(e) {
+
+    if (e.keyCode == 87) {
+       
+        TeclaCimaPressionada_jogador_01 = false;
+    } else if (e.keyCode == 83) {
+        TeclaBaixoPressionada_jogador_01 = false;
+    }
+}
+
+function tecla_s(e) {
+    if (e.keyCode == 87) {
+        TeclaCimaPressionada_jogador_01 = true;
+        
+    } else if (e.keyCode == 83) {
+        TeclaBaixoPressionada_jogador_01 = true;
+    }
+}
+
+// Jogador 02
+function seta_cima(e) {
+
+    if (e.keyCode == 38) {
+       
+        TeclaCimaPressionada_jogador_02 = false;
+        teclaCimaPressionada = false;//usado para o caso de ser PVCPU
+    } else if (e.keyCode == 40) {
+        TeclaBaixoPressionada_jogador_02 = false;
+        teclaBaixoPressionada = false; //usado para o caso de ser PVCPU
+    }
+}
+
+function seta_baixo(e) {
+    if (e.keyCode == 38) {
+       
+      
+        TeclaCimaPressionada_jogador_02 = true;
+        teclaCimaPressionada = true //usado para o caso de ser PVCPU
+    } else if (e.keyCode == 40) {
+        TeclaBaixoPressionada_jogador_02 = true;
+        teclaBaixoPressionada = true //usado para o caso de ser PVCPU
+    }
+}
+
+
+
     while(escolha_da_dificuldade==false){// escolha da dificuldade
        
          
@@ -165,78 +215,13 @@ function iniciarJogo() {
 
     }
 
-
     //Mantém a tecla como "falso" para não realizar ação
-   
-
     setInterval(loopGame, 30);
-    
-       
-
+    }//if teste
 }
 
    
     
-
-
-
-
-//Verificação - Pressionando as teclas (Consulte as keys)
-
-//Jogador 01
-function tecla_w(e) {
-
-    if (e.keyCode == 87) {
-       
-        TeclaCimaPressionada_jogador_01 = false;
-    } else if (e.keyCode == 83) {
-        TeclaBaixoPressionada_jogador_01 = false;
-    }
-}
-
-function tecla_s(e) {
-    if (e.keyCode == 87) {
-       
-      
-        TeclaCimaPressionada_jogador_01 = true;
-        
-    } else if (e.keyCode == 83) {
-        TeclaBaixoPressionada_jogador_01 = true;
-       
-    }
-}
-
-// Jogador 02
-function seta_cima(e) {
-
-    if (e.keyCode == 38) {
-       
-        TeclaCimaPressionada_jogador_02 = false;
-        teclaCimaPressionada = false;//usado para o caso de ser PVCPU
-    } else if (e.keyCode == 40) {
-        TeclaBaixoPressionada_jogador_02 = false;
-        teclaBaixoPressionada = false; //usado para o caso de ser PVCPU
-    }
-}
-
-function seta_baixo(e) {
-    if (e.keyCode == 38) {
-       
-      
-        TeclaCimaPressionada_jogador_02 = true;
-        teclaCimaPressionada = true //usado para o caso de ser PVCPU
-    } else if (e.keyCode == 40) {
-        TeclaBaixoPressionada_jogador_02 = true;
-        teclaBaixoPressionada = true //usado para o caso de ser PVCPU
-    }
-}
-
-
-
-
-
-
-
 
 
 function loopGame() {
@@ -329,34 +314,7 @@ function loopGame() {
                 oponenteParaCima = true;
             }
         }
-
-       
-       
-        
-
-        
     }
-
-    
-
-
-   
-
-    
-    
-
-
-//teste
-
-
-
-
-
-
-
-
-
-
 
 
     /****************************** BOLA *****************************/  
@@ -615,7 +573,9 @@ function loopGame() {
 /****************************** FUNÇÃO DO JQUERY *****************************/ 
  
 $(function () {
-   
+  
     iniciarJogo();
+   
+    
    
 });
