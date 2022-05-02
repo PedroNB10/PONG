@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Press Start 2P', cursive;
 }
 body{
     color: white;
@@ -13,12 +14,14 @@ body{
     border-radius: 50px;
     border: none;
     cursor: pointer;
+    background-color: deepskyblue;
+    color: white;
+    margin-bottom: 30px;
     
 }
 
 .button-style:hover {
     background-color: #FF00CE;
-    color: aqua;
     cursor: pointer;
 }
 
@@ -29,6 +32,8 @@ body{
     border-radius: 50px;
     border: none;
     cursor: pointer;
+    background-color: deepskyblue;
+    color: white;
 }
 
 .button-start-style:hover {
@@ -40,6 +45,9 @@ body{
 
 #select-game{
  text-align: center;
- margin-top: 45vh;
+ 
+ 
+
+
 }
 

@@ -6,20 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Seleção</title>
     <link rel="stylesheet" href="./styleMenu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 
 <body>
   
     
     <div id="select-game">
-        <button id="PVP-button" class="button-style">PVP</button>
-        <button id="PVCPU-button" class="button-style">PVCPU</button>
+        <button id="PVP-button" class="button-style" onclick="PvpModeSelected()">PVP</button>
+        <button id="PVCPU-button" class="button-style" onclick="PvcpuModeSelected()" onmouseleave="PvpModeSelelcted()">PVCPU</button>
+        
     </div>
+
+    <center><h2>Escolha a Dificuldade de 1 a 9</h2></center>
+        <center><input type="text"></center>
     
-    <center><a href="./start.html"><button class="button-start-style" >START</button></a></center>
+    <center><a  id="hyperlink" href=""><button  onclick="StartGame()" id="start-button" class="button-start-style" >START</button></a></center>
+
     
-    <script src="./jquery.js"></script>
-    <script src="./script.js"></script>
+    
+   <script src="./menu.js"></script>
  
 </body>
 </html>

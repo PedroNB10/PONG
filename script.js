@@ -1,6 +1,5 @@
 /*************************** Criação das variáveis utilziadas no código ***************************/
-// var botao = document.getElementById("PVP-button")
-// botao.style.color = "red"
+
 
 var teste = 1
 
@@ -21,7 +20,7 @@ var canvas, context,
     velocidadeBola,
     pontosJogador, pontosOponente;
 
-    var escolha_da_dificuldade = false
+   
 
     var som_ponto=new Audio('sons_pong/Ponto.mp3');
     var som_rebote=new Audio('sons_pong/Rebote.mp3')
@@ -36,18 +35,13 @@ var canvas, context,
     var contador_de_pontos_B = 0
     var resposta_ao_jogo = document.getElementById("res")
     var botao = document.getElementById('botao')
-    var tipo_jogo = 'none'
-    
-    // botao.addEventListener(click, "criacao_tela_canva")
 
-    var jogo_comecou = false
-    var ponto_atual = ''
-    var dificuldade
+    // var tipo_jogo = 'none'
+    // var escolha_da_dificuldade = false
+    // var ponto_atual = ''
+    // var dificuldade = 0
     
-    // while(jogo_comecou==false){
-
-        
-    // }
+  
     
 //OBS: Os sons interativos só funcionam quando há interação com as barrinhas do jogo 
 
@@ -133,8 +127,6 @@ function seta_cima(e) {
 
 function seta_baixo(e) {
     if (e.keyCode == 38) {
-       
-      
         TeclaCimaPressionada_jogador_02 = true;
         teclaCimaPressionada = true //usado para o caso de ser PVCPU
     } else if (e.keyCode == 40) {
