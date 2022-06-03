@@ -131,16 +131,6 @@ function seta_baixo(e) {
     }
 }
 
-
-
-    // while(escolha_da_dificuldade==false){// escolha da dificuldade
-       
-         
-
-        // dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 9:")
-        
-        // dificuldade = Number(dificuldade)
-
         if(dificuldade>0 && dificuldade<10){
             velocidadeBola =velocidadeBola*dificuldade
             escolha_da_dificuldade=true

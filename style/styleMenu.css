@@ -8,15 +8,29 @@ body{
     background: linear-gradient(90deg, rgba(8,248,255,1) 0%, rgba(103,27,235,1) 35%, rgba(255,0,206,1) 91%);
 }
 
+#game-title{
+    margin-top: 3%;
+}
+
+#first-title{
+    margin-top: 4%;
+    margin-bottom: 2%;
+}
+
+#second-title{
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
 .button-style{
-    width: 100px;
+    width: 9.5%;
     height: 30px;
     border-radius: 50px;
     border: none;
     cursor: pointer;
     background-color: deepskyblue;
     color: white;
-    margin-bottom: 30px;
+    margin-bottom: 2.5%;
     
 }
 
@@ -26,8 +40,8 @@ body{
 }
 
 .button-start-style{
-    margin-top: 10px;
-    width: 100px;
+    margin-top: 1.5%;
+    width: 30%;
     height: 30px;
     border-radius: 50px;
     border: none;
@@ -49,5 +63,11 @@ body{
  
 
 
+}
+
+.container-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 

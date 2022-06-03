@@ -1,20 +1,6 @@
 ﻿
 
 
-
-#res{
-    color: transparent;
-    text-align: center;
-    pointer-events: none;
-    user-select: none;
-}
-
-img{
-    width: 100px;
-    height: 100px;
-    
-}
-
 body{
     color: white;
     background: linear-gradient(90deg, rgba(8,248,255,1) 0%, rgba(103,27,235,1) 35%, rgba(255,0,206,1) 91%);
@@ -23,15 +9,54 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+#res{
+    color: transparent;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    width: 100%;
+    
+    
+}
+
+.button-config-left{
+   
+    width: 80px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: #11114E;
+    color: white;
+   
+}
+
+.button-config-right{
+   
+    width: 80px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: #11114E;
+    color: white;
+}
+
 #canvas {
     
-
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    
     border:1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-
+   
 
 }

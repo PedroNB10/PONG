@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,22 +13,36 @@
 </head>
 
 <body>
-  
-    
+    <center>
+        <h1 id="game-title">PONG GAME</h1>
+    </center>
+    <center>
+        <h2 id="first-title">Escolha o modo de Jogo</h2>
+    </center>
+
     <div id="select-game">
-        <button id="PVP-button" class="button-style" onclick="PvpModeSelected()">PVP</button>
-        <button id="PVCPU-button" class="button-style" onclick="PvcpuModeSelected()" onmouseleave="PvpModeSelelcted()">PVCPU</button>
-        
+        <button id="PVP-button" class="button-style" onclick="PvpModeSelected()" onmouseenter="PvpModeSelelctedEnter()"
+            onmouseout="PvpModeSelelctedLeave()">PVP</button>
+        <button id="PVCPU-button" class="button-style" onclick="PvcpuModeSelected()"
+            onmouseenter="PvcpuModeSelelctedEnter()" onmouseout="PvcpuModeSelelctedLeave()">PVCPU</button>
+
     </div>
 
-    <center><h2>Escolha a Dificuldade de 1 a 9</h2></center>
-        <center><input type="text"></center>
-    
-    <center><a  id="hyperlink" href=""><button  onclick="StartGame()" id="start-button" class="button-start-style" >START</button></a></center>
+    <center>
+        <h2 id="second-title">Escolha a Dificuldade</h2>
+    </center>
 
-    
- 
-   <script src="/scripts/menu.js"></script>
+    <div class="container-buttons">
+        <button id="level1" class="button-style" onclick="Level01Selected()">Level 01</button>
+        <button id="level2" class="button-style" onclick="Level02Selected()">Level 02</button>
+        <button id="level3" class="button-style" onclick="Level03Selected()">Level 03</button>
+    </div>
+
+    <center><a id="hyperlink" href=""><button onclick="StartGame()" id="start-button"
+                class="button-start-style">START</button></a></center>
+
+    <script src="/scripts/menu.js"></script>
 
 </body>
+
 </html>

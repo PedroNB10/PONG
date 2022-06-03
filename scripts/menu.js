@@ -4,28 +4,91 @@ var pvcpu_button = document.getElementById("PVCPU-button")
 
 var tipo_jogo = 'none'
 var ponto_atual = ''
-var escolha_da_dificuldade = false
-var dificuldade = 0
-// pvcpu_button.style.color = "green"
-// pvp_button.style.color = "red"
 
 
-function PvpModeSelected(){
+var level_selected = false
+var level
+
+function PvpModeSelected() {
     pvp_button.style.background = "red"
     pvcpu_button.style.background = "deepskyblue"
-    tipo_jogo='PVP'
+    tipo_jogo = 'PVP'
+
 }
 
-function PvcpuModeSelected(){
+function PvcpuModeSelected() {
     pvcpu_button.style.background = "green"
     pvp_button.style.background = "deepskyblue"
-    tipo_jogo='PVCPU'
+    tipo_jogo = 'PVCPU'
 }
 
-function StartGame(){
+function PvpModeSelelctedEnter() {
+    if (pvp_button.style.background == "deepskyblue" && pvcpu_button.style.background == "green" || pvp_button.style.background == "deepskyblue") {
+    pvp_button.style.background = "#FF00CE"
 
-    var a = document.getElementById('hyperlink'); //or grab it by tagname etc
-    a.href = "./start.html"
+    }
+}
+
+function PvpModeSelelctedLeave() {
+
+    if (pvp_button.style.background != "red") {
+        pvp_button.style.background = "deepskyblue"
+    }
+
+}
+
+function PvcpuModeSelelctedEnter() {
+    if (pvcpu_button.style.background == "deepskyblue" && pvp_button.style.background == "red" || pvcpu_button.style.background == "deepskyblue") {
+        pvcpu_button.style.background = "#FF00CE"
+
+    }
+}
+
+function PvcpuModeSelelctedLeave() {
+
+    if (pvcpu_button.style.background != "green") {
+        pvcpu_button.style.background = "deepskyblue"
+    }
+
+}
+
+function Level01Selected() {
+    document.getElementById("level1").style.background = "#11114E"
+    document.getElementById("level2").style.background = "deepskyblue"
+    document.getElementById("level3").style.background = "deepskyblue"
+    level_selected = true
+    level = 1
+
+}
+
+function Level02Selected() {
+    document.getElementById("level1").style.background = "deepskyblue"
+    document.getElementById("level2").style.background = "#11114E"
+    document.getElementById("level3").style.background = "deepskyblue"
+    level_selected = true
+    level = 2
+
+}
+
+function Level03Selected() {
+    document.getElementById("level1").style.background = "deepskyblue"
+    document.getElementById("level2").style.background = "deepskyblue"
+    document.getElementById("level3").style.background = "#11114E"
+    level_selected = true
+    level = 3
+
+}
+
+function StartGame() {
+    var a = document.getElementById('hyperlink');
+
+    if (pvp_button.style.background == "red" && level_selected == true && level == 1) {
+        a.href = "./PVP/PVP_nivel_01.html"
+    }
+
+    else if (pvcpu_button.style.background == "green" && level_selected == true && level == 1) {
+        a.href = "./PVCPU/PVCPU_nivel_01.html"
+    }
 
 }
 

@@ -35,7 +35,7 @@ var canvas, context,
     var botao = document.getElementById('botao')
 
     var tipo_jogo = 'PVP'
-    var dificuldade = 1  //1, 3 ou 6
+    var dificuldade = 6  //1, 3 ou 6
     var escolha_da_dificuldade = true
     var ponto_atual = ''
    
@@ -130,16 +130,6 @@ function seta_baixo(e) {
         teclaBaixoPressionada = true //usado para o caso de ser PVCPU
     }
 }
-
-
-
-    // while(escolha_da_dificuldade==false){// escolha da dificuldade
-       
-         
-
-        // dificuldade = prompt("Coloque a dificuldade do jogo de 1 a 9:")
-        
-        // dificuldade = Number(dificuldade)
 
         if(dificuldade>0 && dificuldade<10){
             velocidadeBola =velocidadeBola*dificuldade
