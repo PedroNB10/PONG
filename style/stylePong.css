@@ -4,7 +4,6 @@
 body{
     color: white;
     background: linear-gradient(90deg, rgba(8,248,255,1) 0%, rgba(103,27,235,1) 35%, rgba(255,0,206,1) 91%);
-    
     background-size: 100% auto;
     font-family: 'Roboto', sans-serif;
 }
@@ -18,14 +17,30 @@ body{
 
 
 .container{
-    display: flex;
     align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    width: 100%;
     
     
 }
+
+#canvas {
+    
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+   
+
+}
+
 
 .button-config-left{
    
@@ -37,6 +52,10 @@ body{
     background-color: #11114E;
     color: white;
    
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    
 }
 
 .button-config-right{
@@ -48,15 +67,12 @@ body{
     cursor: pointer;
     background-color: #11114E;
     color: white;
-}
 
-#canvas {
-    
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border:1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
    
-
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    
 }
+
+
