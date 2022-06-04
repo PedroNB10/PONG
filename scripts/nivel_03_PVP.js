@@ -20,11 +20,12 @@ var canvas, context,
 
    
 
-    var som_ponto=new Audio('/sons_pong/Ponto.mp3');
-    var som_rebote=new Audio('/sons_pong/Rebote.mp3')
-    var som_lateral=new Audio('/sons_pong/Lateral.mp3')
-    var som_vitoria=new Audio('/sons_pong/som_vitoria_10pts.mp3')
-    var som_inicio=new Audio('/sons_pong/musica_pong_final.mp3')
+    var som_ponto=new Audio('../sons_pong/Ponto.mp3');
+    var som_rebote=new Audio('../sons_pong/Rebote.mp3')
+    var som_lateral=new Audio('../sons_pong/Lateral.mp3')
+    var som_vitoria=new Audio('../sons_pong/som_vitoria_10pts.mp3')
+    var som_inicio=new Audio('../sons_pong/musica_pong_final.mp3')
+
 
     var vitorias_oponente = false;
     var vitorias_jogador = false;

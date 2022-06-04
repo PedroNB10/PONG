@@ -83,27 +83,27 @@ function StartGame() {
     var a = document.getElementById('hyperlink');
 
     if (pvp_button.style.background == "red" && level_selected == true && level == 1) {
-        a.href = "./PVP/PVP_nivel_01.html"
+        a.href = "./pages/PVP_nivel_01.html"
     }
 
     else if (pvp_button.style.background == "red" && level_selected == true && level == 2) {
-        a.href = "./PVP/PVP_nivel_02.html"
+        a.href = "./pages/PVP/PVP_nivel_02.html"
     }
 
     else if (pvp_button.style.background == "red" && level_selected == true && level == 3) {
-        a.href = "./PVP/PVP_nivel_03.html"
+        a.href = "./pages/PVP_nivel_03.html"
     }
 
     else if (pvcpu_button.style.background == "green" && level_selected == true && level == 1) {
-        a.href = "./PVCPU/PVCPU_nivel_01.html"
+        a.href = "./pages/PVCPU_nivel_01.html"
     }
 
     else if (pvcpu_button.style.background == "green" && level_selected == true && level == 2) {
-        a.href = "./PVCPU/PVCPU_nivel_02.html"
+        a.href = "./pages/PVCPU_nivel_02.html"
     }
     
     else if (pvcpu_button.style.background == "green" && level_selected == true && level == 3) {
-        a.href = "./PVCPU/PVCPU_nivel_03.html"
+        a.href = "./pages/PVCPU_nivel_03.html"
     }
 
 }
