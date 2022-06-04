@@ -87,7 +87,7 @@ function StartGame() {
     }
 
     else if (pvp_button.style.background == "red" && level_selected == true && level == 2) {
-        a.href = "./pages/PVP/PVP_nivel_02.html"
+        a.href = "./pages/PVP_nivel_02.html"
     }
 
     else if (pvp_button.style.background == "red" && level_selected == true && level == 3) {

@@ -1,6 +1,10 @@
 /*************************** Criação das variáveis utilziadas no código ***************************/
+var canvas = document.querySelector('canvas'); //funciona com o nome do elemento 
+canvas.width = window.innerWidth*0.60377358490566037735849056603774//insere no canva a largura da tela 
+canvas.height = window.innerHeight*0.80775444264943457189014539579968 //insere no canva a altura da tela
 
-
+console.log(window.innerHeight)
+console.log(window.innerWidth)
 var canvas, context,
     barraWidth, barraHeigth,
     jogadorPosX, jogadorPosY,
