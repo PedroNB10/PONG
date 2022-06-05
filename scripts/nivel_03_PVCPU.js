@@ -349,7 +349,7 @@ function loopGame() {
         }
     }
 
-    if ((bolaPosX <= -bolaRaio) || (bolaPosX > canvas.width)) { // se a bola saiu da tela
+    if ((bolaPosX <= -bolaRaio) || (bolaPosX > canvas.width+bolaRaio)) { // se a bola saiu da tela
        
        
        
