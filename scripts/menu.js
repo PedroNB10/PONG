@@ -61,6 +61,58 @@ function Level01Selected() {
 
 }
 
+function Level01Enter() {
+    if (document.getElementById("level1").style.background == "deepskyblue" ) {
+        document.getElementById("level1").style.background = "#FF00CE"
+
+    }
+}
+
+function Level01Leave() {
+
+    if (level == 3 || level == 2)  {
+        
+        document.getElementById("level1").style.background = "deepskyblue"
+       
+    }
+
+}
+
+function Level02Enter() {
+    if (document.getElementById("level2").style.background == "deepskyblue") {
+        document.getElementById("level2").style.background = "#FF00CE"
+
+    }
+}
+
+function Level02Leave() {
+
+    if (level == 1 || level == 3)  {
+        
+        document.getElementById("level2").style.background = "deepskyblue"
+       
+    }
+
+}
+
+function Level03Enter() {
+    if (document.getElementById("level3").style.background == "deepskyblue") {
+        document.getElementById("level3").style.background = "#FF00CE"
+
+    }
+}
+
+function Level03Leave() {
+
+    if (level == 2 || level == 1)  {
+        
+        document.getElementById("level3").style.background = "deepskyblue"
+       
+    }
+
+}
+
+
 function Level02Selected() {
     document.getElementById("level1").style.background = "deepskyblue"
     document.getElementById("level2").style.background = "#11114E"

@@ -17,7 +17,7 @@
         <h1 id="game-title">PONG GAME</h1>
     </center>
     <center>
-        <h2 id="first-title">Escolha o modo de Jogo</h2>
+        <h2 id="first-title">Choose the game mode</h2>
     </center>
 
     <div id="select-game">
@@ -29,13 +29,13 @@
     </div>
 
     <center>
-        <h2 id="second-title">Escolha a Dificuldade</h2>
+        <h2 id="second-title">Choose the dificulty level</h2>
     </center>
 
     <div class="container-buttons">
-        <button id="level1" class="button-style" onclick="Level01Selected()">Level 01</button>
-        <button id="level2" class="button-style" onclick="Level02Selected()">Level 02</button>
-        <button id="level3" class="button-style" onclick="Level03Selected()">Level 03</button>
+        <button id="level1" class="button-style" onclick="Level01Selected()" onmouseenter="Level01Enter()" onmouseout="Level01Leave()" >Level 01</button>
+        <button id="level2" class="button-style" onclick="Level02Selected()" onmouseenter="Level02Enter()" onmouseout="Level02Leave()" >Level 02</button>
+        <button id="level3" class="button-style" onclick="Level03Selected()" onmouseenter="Level03Enter()" onmouseout="Level03Leave()">Level 03</button>
     </div>
 
     <center><a id="hyperlink" href=""><button onclick="StartGame()" id="start-button"
